@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+*{
+    font-family: "Work Sans";
+}
+
+.button-1{
+    background: #ffd82a;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: black;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.button-2{
+    background: #D64700;
+    padding: 6px 12px;
+    border-radius: 8px;
+    color: white;
+    font-weight: 500;
+    transition: 0.5s;
+}
+
+.button-2:hover{
+    background-color: #FF7936;
+    transform: scale(1.1);
+}
+
+
+.button-1:hover{
+    background-color: #FAFF6D;
+    transform: scale(1.1);
+}
+
+span{
+    color: #D64700;
+}
+
+.everything{
+    background-image: url('./assets/image.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
