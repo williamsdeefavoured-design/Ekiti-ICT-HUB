@@ -12,10 +12,7 @@ function AdminNavbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // remove token
-    setTimeout(() => {
-      setShowSuccess(false);
       navigate("/admin-signin");
-    }, 2000);
   };
 
   useEffect(() => {
