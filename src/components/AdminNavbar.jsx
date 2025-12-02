@@ -1,15 +1,21 @@
 import React, { useState, useEffect } from "react";
 import dropDown from "../assets/arrow-square-down.png";
 import notification from "../assets/notification.png";
+import { useNavigate } from "react-router";
 
 function AdminNavbar() {
   const [user, setUser] = useState({ name: "Loading...", role: "" });
+
+  const navigate = useNavigate();
 
   const [openDropdown, setOpenDropdown] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // remove token
-    window.location.href = "/admin-signin"; // redirect
+    setTimeout(() => {
+      setShowSuccess(false);
+      navigate("/admin-signin");
+    }, 2000);
   };
 
   useEffect(() => {
