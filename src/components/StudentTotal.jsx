@@ -101,7 +101,7 @@ function StudentTotal() {
             bgColor="bg-yellow-400"
             textColor="text-black"
           />
-          {/* <StudentTotCard
+          <StudentTotCard
             title="Total Present"
             value={attendance.totalPresent || 0}
             bgColor="bg-[#0B7300]"
@@ -110,25 +110,25 @@ function StudentTotal() {
             title="Total Absent"
             value={attendance.totalAbsent || 0}
             bgColor="bg-[#D64700]"
-          /> */}
+          />
           <StudentTotCard
             title="Overall Attendance %"
             value={attendance.overallAttendancePercentage || 0}
             bgColor="bg-[#D64700]"
           />
-          {/* <StudentTotCard
+          <StudentTotCard
             title="Best Attendance"
             value={attendance.bestAttendance?.attendancePercentage || 0}
             subtitle={attendance.bestAttendance?.name}
             bgColor="bg-[#0B7300]"
-          /> */}
-          {/* <StudentTotCard
+          />
+          <StudentTotCard
             title="Worst Attendance"
             value={attendance.worstAttendance?.attendancePercentage || 0}
             subtitle={attendance.worstAttendance?.name}
             bgColor="bg-yellow-400"
             textColor="text-black"
-          /> */}
+          />
         </div>
       </div>
     </div>
