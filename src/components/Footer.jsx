@@ -4,7 +4,7 @@ import logoimg from "../assets/ekiti-logo-1.png";
 
 function Footer() {
   return (
-    <div className="footer flex flex-col md:flex-row items-center justify-evenly bg-[#0B7300] text-white">
+    <div className="footer flex flex-col relative bottom-0 md:flex-row items-center justify-evenly bg-[#0B7300] text-white">
         <div className="logo">
             <img className='w-40 p-5' src={logoimg} alt="" />
         </div>
