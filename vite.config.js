@@ -9,5 +9,7 @@ export default defineConfig({
   ],
   server: {
     port: 5000, // 👈 change this to match your backend if you want
+    historyApiFallback: true
+
   },
 })
