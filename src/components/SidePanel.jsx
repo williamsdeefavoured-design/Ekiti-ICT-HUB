@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import logoimg from "../assets/ekiti-logo-1.png";
 import dashboardIcon from "../assets/dashboard.png";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 function SidePanel() {

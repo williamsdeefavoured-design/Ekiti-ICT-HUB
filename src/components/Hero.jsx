@@ -28,9 +28,9 @@ const Hero = () => {
               entrepreneurs, developers and makers.
             </p>
 
-            <h3 className="mt-4 text-lg sm:text-xl font-semibold text-[#0b1220]">
+            {/* <h3 className="mt-4 text-lg sm:text-xl font-semibold text-[#0b1220]">
               Attendance WebApp
-            </h3>
+            </h3> */}
           </div>
 
           {/* RIGHT: image */}

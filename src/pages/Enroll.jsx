@@ -73,14 +73,28 @@ function Enroll() {
       <Header />
 
       {showSuccess && <Succesful successTxt="Enrollment Successful 🎉" />}
-
-      <div className="enroll-form h-screen flex flex-col items-center justify-center">
-        <div className="bg-[#ffd82a] px-30 py-20 flex flex-col rounded-3xl shadow-xl items-center gap-15">
-          <h1 className="text-orange-600 font-black text-3xl">
+      
+      <div className="enroll-form min-h-screen flex items-center justify-center px-4">
+        <div
+          className="
+      bg-[#ffd82a] 
+      w-full
+      max-w-xl 
+      px-6 sm:px-10 md:px-14 
+      py-8 sm:py-10 md:py-12 
+      rounded-3xl 
+      shadow-xl 
+      flex flex-col 
+      items-center 
+      justify-center
+      gap-6
+    "
+        >
+          <h1 className="text-orange-600 font-black text-2xl sm:text-3xl text-center">
             Student Enrollment Form
           </h1>
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="w-full">
             <Inputs
               name="Firstname"
               bgcolor="white"

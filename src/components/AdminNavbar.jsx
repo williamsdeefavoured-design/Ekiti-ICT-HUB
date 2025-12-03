@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dropDown from "../assets/arrow-square-down.png";
 import notification from "../assets/notification.png";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 function AdminNavbar() {
   const [user, setUser] = useState({ name: "Loading...", role: "" });

@@ -12,7 +12,7 @@ const Card = ({ courseName, courseDet, bgColor, icon }) => {
         {courseName}
       </h3>
       <p className="text-sm">{courseDet}</p>
-      <button className="button-2 mt-4">Enroll</button>
+      {/* <button className="button-2 mt-4">Enroll</button> */}
     </div>
   );
 };

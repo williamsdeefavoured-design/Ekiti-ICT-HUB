@@ -44,7 +44,7 @@ function AdminSignUp() {
         setFormData({ name: "", email: "", track: "", password: "" });
         setTimeout(() => {
           setShowSuccess(false);
-          navigate("/admin-signin")
+          navigate("/admin-signin");
         }, 3000);
       } else {
         setErrorMsgServer(data?.message || "Signup failed, try again!");
@@ -67,14 +67,28 @@ function AdminSignUp() {
 
         <form
           onSubmit={handleSubmit}
-          className="form everything font-semibold flex flex-col md:flex-row justify-center items-center gap-10 md:gap-70 mt-10 mb-10 bg-[#01D5961A] w-full max-w-7xl mx-auto p-6 rounded-3xl shadow-lg"
+          className="
+          form 
+          font-semibold 
+          flex flex-col md:flex-row 
+          items-center md:items-start 
+          justify-between 
+          gap-10 md:gap-16 
+          mt-10 mb-10 
+          bg-[#01D5961A]
+          w-full max-w-6xl 
+          mx-auto 
+          p-6 sm:p-8 md:p-10 
+          rounded-3xl 
+          shadow-lg
+        "
         >
-          <div className="left flex flex-col items-start justify-center gap-6 mt-10 mb-10">
-            <h2 className="text-3xl font-bold text-orange-600 mb-4">
+          {/* LEFT SIDE — FORMS */}
+          <div className="left w-full md:w-1/2 flex flex-col gap-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-orange-600 mb-2">
               Hello Admin
             </h2>
 
-            {/* ✅ Each input now updates its own key in formData */}
             <Inputs
               name="name"
               label="Full Name"
@@ -130,33 +144,21 @@ function AdminSignUp() {
               }
             />
 
-            {/* <Inputs
-              name="passwordConfirm"
-              label="Re-Enter Password"
-              type="password"
-              placeholder="Re-enter Password1234"
-              value={formData.passwordConfirm}
-              onChange={(e) =>
-                setFormData({ ...formData, passwordConfirm: e.target.value })
-              }
-            /> */}
-
             <button
               type="submit"
               disabled={isLoading}
               className="bg-orange-600 text-white px-6 py-2 rounded-md hover:bg-orange-700 transition w-full duration-300"
             >
               {isLoading ? (
-                <>
-                  <div className="flex items-center justify-center space-x-2">
-                    <FaSpinner className="animate-spin" />{" "}
-                    <p className="">Loading</p>
-                  </div>
-                </>
+                <div className="flex items-center justify-center space-x-2">
+                  <FaSpinner className="animate-spin" />
+                  <p>Loading</p>
+                </div>
               ) : (
-                <p className=""> Sign Up</p>
+                "Sign Up"
               )}
             </button>
+
             {errorMsgServer && <p className="text-red-500">{errorMsgServer}</p>}
 
             <p className="text-gray-500 font-medium">
@@ -167,11 +169,12 @@ function AdminSignUp() {
             </p>
           </div>
 
-          <div className="right">
+          {/* RIGHT SIDE — IMAGE */}
+          <div className="right w-full md:w-1/2 flex justify-center">
             <img
               src={mainimg}
               alt="Admin Signup"
-              className="w-96 h-auto object-contain"
+              className="w-64 sm:w-80 md:w-full max-w-sm object-contain"
             />
           </div>
         </form>

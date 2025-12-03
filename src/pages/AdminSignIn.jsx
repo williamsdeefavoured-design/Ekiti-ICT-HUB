@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import Inputs from "../components/Inputs";
 import mainimg from "../assets/main-img.png";
 import Succesful from "../components/Succesful";
-import { Link, useNavigate } from "react-router"; // ✅ use react-router-dom, not react-router
+import { Link, useNavigate } from "react-router-dom"; // ✅ use react-router-dom, not react-router
 
 function AdminSignIn() {
   const [isLoading, setIsLoading] = useState(false);
@@ -48,7 +48,6 @@ function AdminSignIn() {
 
       if (response.ok) {
         localStorage.setItem("authToken", data.token); // ✅ SAVE token here
-        
 
         setShowSuccess(true);
         setFormData({ email: "", password: "" });
@@ -76,10 +75,25 @@ function AdminSignIn() {
 
       <form
         onSubmit={handleSubmit}
-        className="form everything font-semibold flex flex-col md:flex-row justify-center items-center gap-10 md:gap-70 mt-10 mb-10 bg-[#01D5961A] w-full max-w-7xl mx-auto p-6 rounded-3xl shadow-lg"
+        className="
+    form 
+    font-semibold 
+    flex flex-col md:flex-row 
+    items-center md:items-start 
+    justify-between 
+    gap-10 md:gap-16 
+    mt-10 mb-10 
+    bg-[#01D5961A]
+    w-full max-w-6xl 
+    mx-auto 
+    p-6 sm:p-8 md:p-10 
+    rounded-3xl 
+    shadow-lg
+  "
       >
-        <div className="left flex flex-col items-start justify-center gap-6 mt-10 mb-10">
-          <h2 className="text-3xl font-bold text-orange-600 mb-4">
+        {/* LEFT SIDE */}
+        <div className="left w-full md:w-1/2 flex flex-col gap-6">
+          <h2 className="text-3xl font-bold text-orange-600 mb-2">
             Hello Admin
           </h2>
 
@@ -107,7 +121,16 @@ function AdminSignIn() {
 
           <button
             type="submit"
-            className="bg-orange-600 text-white px-6 py-2 rounded-md hover:bg-orange-700 transition w-full duration-300"
+            className="
+        bg-orange-600 
+        text-white 
+        px-6 py-2 
+        rounded-md 
+        hover:bg-orange-700 
+        transition 
+        w-full 
+        duration-300
+      "
           >
             Sign In
           </button>
@@ -122,11 +145,12 @@ function AdminSignIn() {
           </p>
         </div>
 
-        <div className="right">
+        {/* RIGHT SIDE */}
+        <div className="right w-full md:w-1/2 flex justify-center">
           <img
             src={mainimg}
             alt="Admin Sign In"
-            className="w-96 h-auto object-contain"
+            className="w-64 sm:w-80 md:w-full max-w-sm object-contain"
           />
         </div>
       </form>

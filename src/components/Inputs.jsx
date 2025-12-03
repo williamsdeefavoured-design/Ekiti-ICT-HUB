@@ -9,7 +9,6 @@ function Inputs({
   value,
   onChange,
   bgcolor,
-  width = "100%",
   options = [],
 }) {
   const listId = `${name || label}-list`;
@@ -20,7 +19,7 @@ function Inputs({
         {label}
       </label>
 
-      <div className="flex items-center">
+      <div className="relative flex items-center">
         <input
           name={name}
           id={name}
@@ -28,17 +27,23 @@ function Inputs({
           placeholder={placeholder}
           value={value ?? ""}
           onChange={onChange}
-          style={{
-            backgroundColor: bgcolor,
-            width: width, // ⬅️ HERE BRO!!!
-          }}
+          style={{ backgroundColor: bgcolor }}
+
+          /* RESPONSIVE WIDTH HERE */
+          className="w-full
+            font-semibold px-5 py-3 border rounded-md 
+            focus:outline-none focus:ring-2 focus:ring-orange-500
+          "
           list={options.length > 0 ? listId : undefined}
           required
-          className="flex font-semibold px-5 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
-        />{" "}
-        <p className="ml-[-4vh] text-xl cursor-pointer">
-          <AiOutlineEye></AiOutlineEye>
-        </p>
+        />
+
+        {/* Eye icon only for password */}
+        {type === "password" && (
+          <p className="absolute right-4 text-xl cursor-pointer text-gray-600">
+            <AiOutlineEye />
+          </p>
+        )}
       </div>
 
       {options.length > 0 && (
