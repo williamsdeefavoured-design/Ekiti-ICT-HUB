@@ -5,7 +5,15 @@ import StudentTable from "./StudentTable";
 
 function LeftSection() {
   return (
-    <div className="left-container">
+    <div
+      className="
+        left-container 
+        w-full 
+        overflow-x-hidden 
+        px-3 sm:px-6 lg:px-10 
+        pb-10
+      "
+    >
       <AdminNavbar />
       <StudentTotal />
       <StudentTable />
