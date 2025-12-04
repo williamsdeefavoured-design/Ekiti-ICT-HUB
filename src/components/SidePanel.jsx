@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 function SidePanel() {
-
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
@@ -38,15 +37,24 @@ function SidePanel() {
         </div>
 
         {/* MENU ITEMS */}
-        <div className="dashboard-txt flex items-center gap-2">
-          <img className="w-6" src={dashboardIcon} />
-          <Link to="/admin-dashboard">
+
+        
+        <div className="side-links flex flex-col gap-20">
+          <div className="dashboard-txt flex items-center gap-2">
+            <img className="w-6" src={dashboardIcon} />
+            <Link to="/admin-dashboard">
+              <h1 className="text-lg font-semibold hover:text-orange-600 transition">
+                Dashboard
+              </h1>
+            </Link>
+          </div>
+
+          <Link to="/enroll">
             <h1 className="text-lg font-semibold hover:text-orange-600 transition">
-              Dashboard
+              Enroll a student
             </h1>
           </Link>
         </div>
-
       </div>
 
       {/* DARK OVERLAY (MOBILE ONLY) */}

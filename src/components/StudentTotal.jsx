@@ -103,12 +103,12 @@ function StudentTotal() {
           />
           <StudentTotCard
             title="Total Present"
-            value={attendance.totalPresent || 0}
+            value={attendance.totalPresentToday || 0}
             bgColor="bg-[#0B7300]"
           />
           <StudentTotCard
             title="Total Absent"
-            value={attendance.totalAbsent || 0}
+            value={attendance.totalAbsentToday || 0}
             bgColor="bg-[#D64700]"
           />
           <StudentTotCard

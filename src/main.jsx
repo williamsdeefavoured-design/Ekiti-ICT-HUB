@@ -11,7 +11,7 @@ import AdminSignUp from "./pages/AdminSignUp.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import Enroll from "./pages/Enroll.jsx";
 import MarkAttendanceModal from "./components/MarkAttendanceModal.jsx";
-
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Notifications
 import { Toaster } from "react-hot-toast";
@@ -20,7 +20,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <Routes>
-
         {/* Home */}
         <Route path="/" element={<App />} />
 
@@ -29,7 +28,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/SignupPage" element={<AdminSignUp />} />
 
         {/* Dashboard */}
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        </Route>
 
         {/* Enroll */}
         <Route path="/enroll" element={<Enroll />} />
