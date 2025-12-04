@@ -26,7 +26,7 @@ function StudentTotCard({
     >
       <p className="font-bold text-base md:text-lg">{title}</p>
 
-      <h1 className="font-extrabold text-5xl md:text-7xl lg:text-8xl">
+      <h1 className="font-extrabold text-5xl md:text-6xl lg:text-7xl">
         {value}
       </h1>
 

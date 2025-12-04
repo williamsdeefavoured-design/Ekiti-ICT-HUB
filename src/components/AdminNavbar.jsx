@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import dropDown from "../assets/arrow-square-down.png";
 import notification from "../assets/notification.png";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 function AdminNavbar() {
   const [user, setUser] = useState({ name: "Loading...", role: "" });
@@ -12,7 +12,7 @@ function AdminNavbar() {
 
   const handleLogout = () => {
     localStorage.removeItem("authToken"); // remove token
-      navigate("/admin-signin");
+    navigate("/admin-signin");
   };
 
   useEffect(() => {
@@ -81,9 +81,17 @@ function AdminNavbar() {
       />
 
       {openDropdown && (
-        <div className="absolute right-10 top-20 bg-white shadow-lg border rounded-lg w-40 py-2">
+        <div className="absolute right-10 top-35 md:top-20 bg-white shadow-lg border rounded-lg w-40 py-2">
+          <div className="sm-screen-link md:hidden">
+            <Link to="/enroll">
+              <button className="w-full text-sm text-left px-4 py-2 hover:bg-gray-100 text-orange-600 font-medium cursor-pointer">
+                Enroll A Student
+              </button>
+            </Link>
+          </div>
+
           <button
-            className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600 font-medium"
+            className="w-full text-left text-sm px-4 py-2 hover:bg-gray-100 text-red-600 font-medium cursor-pointer"
             onClick={handleLogout}
           >
             Logout
