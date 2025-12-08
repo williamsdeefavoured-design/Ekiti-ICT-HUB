@@ -8,51 +8,48 @@ function StudentSearch({ onFilterChange }) {
 
   const token = localStorage.getItem("authToken");
 
-  // Helper to map human-readable options to range strings backend expects
   const mapDateRange = (option) => {
     switch (option) {
-      case "Last 7 Days":
-        return "7d";
-      case "Last 14 Days":
-        return "14d";
-      case "Last 21 Days":
-        return "21d";
-      case "Last 30 Days":
-        return "30d";
-      default:
-        return null;
+      case "Last 7 Days": return "7d";
+      case "Last 14 Days": return "14d";
+      case "Last 21 Days": return "21d";
+      case "Last 30 Days": return "30d";
+      default: return null;
     }
   };
 
   useEffect(() => {
     if (!token) return;
 
-    const fetchFilteredData = async () => {
+    const fetchFiltered = async () => {
       try {
-        let url = "https://bckprj25-1.onrender.com/api/v1/attendance/students-attendance";
-        const params = new URLSearchParams();
+        let url = "";
+        let params = new URLSearchParams();
 
-        // Name filter
+        // 🔹 PRIORITY LOGIC
+        // 1. Name search
         if (searchName) {
-          params.append("name", searchName);
+          url = "https://bckprj25-1.onrender.com/api/v1/attendance/search";
+          params.append("search", searchName);
         }
-
-        // Track filter
-        if (track) {
+        // 2. Track search
+        else if (track) {
           url = `https://bckprj25-1.onrender.com/api/v1/attendance/student-track/${encodeURIComponent(track)}`;
         }
-
-        // Date range filter
-        if (dateRange) {
-          const range = mapDateRange(dateRange);
-          if (range) {
-            url = `https://bckprj25-1.onrender.com/api/v1/attendance/date-range?range=${range}`;
-          }
+        // 3. Date range search
+        else if (dateRange) {
+          url = "https://bckprj25-1.onrender.com/api/v1/attendance/date-range";
+          const mapped = mapDateRange(dateRange);
+          if (mapped) params.append("range", mapped);
+        }
+        // 4. Default: all students
+        else {
+          url = "https://bckprj25-1.onrender.com/api/v1/attendance/students-attendance";
         }
 
-        // Append query params (like name)
-        const queryString = params.toString();
-        const finalUrl = queryString ? `${url}?${queryString}` : url;
+        const finalUrl = params.toString()
+          ? `${url}?${params.toString()}`
+          : url;
 
         const res = await fetch(finalUrl, {
           headers: { Authorization: `Bearer ${token}` },
@@ -60,75 +57,84 @@ function StudentSearch({ onFilterChange }) {
 
         const data = await res.json();
 
-        // Backend for date-range returns data in .data, others might use .students
-        if (data.data) {
-          onFilterChange(data.data);
-        } else if (data.students) {
-          onFilterChange(data.students);
-        } else {
-          onFilterChange([]);
-        }
+        // Normalize backend differences
+        const results = data.data || data.students || [];
+
+        onFilterChange(results);
       } catch (err) {
-        console.error("Failed to fetch filtered students:", err);
+        console.error("Search error:", err);
       }
     };
 
-    fetchFilteredData();
+    fetchFiltered();
   }, [searchName, track, dateRange, token, onFilterChange]);
+
+  // 🔹 When typing a name, clear track + date
+  const handleNameChange = (e) => {
+    setSearchName(e.target.value);
+    setTrack("");
+    setDateRange("");
+  };
+
+  // 🔹 When picking a track, clear name + date
+  const handleTrackChange = (e) => {
+    setTrack(e.target.value);
+    setSearchName("");
+    setDateRange("");
+  };
+
+  // 🔹 When picking a date range, clear search + track
+  const handleDateChange = (e) => {
+    setDateRange(e.target.value);
+    setTrack("");
+    setSearchName("");
+  };
 
   return (
     <div className="studentSearch flex flex-col gap-5 md:flex-row md:items-center w-full">
-      {/* SEARCH BY NAME */}
-      <div className="flex-1 w-full">
-        <Inputs
-          name="search"
-          placeholder="Search by Name"
-          bgcolor="#e6eaee"
-          value={searchName}
-          onChange={(e) => setSearchName(e.target.value)}
-          type="search"
-          width="100%"
-        />
-      </div>
 
-      {/* TRACK DROPDOWN */}
-      <div className="flex-1 w-full">
-        <Inputs
-          name="track"
-          placeholder="Select Track"
-          bgcolor="#e6eaee"
-          value={track}
-          onChange={(e) => setTrack(e.target.value)}
-          type="text"
-          width="100%"
-          options={[
-            "FullStack Development",
-            "Backend Development",
-            "Cloud Computing",
-            "Data Analysis",
-            "Cyber Security",
-          ]}
-        />
-      </div>
+      {/* Search by Name */}
+      <Inputs
+        name="search"
+        placeholder="Search by Name"
+        bgcolor="#e6eaee"
+        value={searchName}
+        onChange={handleNameChange}
+        type="search"
+      />
 
-      {/* DATE FILTER */}
-      <div className="flex-1 w-full">
-        <Inputs
-          name="date"
-          placeholder="Sort By Date"
-          bgcolor="#e6eaee"
-          value={dateRange}
-          onChange={(e) => setDateRange(e.target.value)}
-          type="text"
-          width="100%"
-          options={[
-            "Last 7 Days",
-            "Last 14 Days",
-            "Last 21 Days",
-            "Last 30 Days",
-          ]}
-        />
-      </div>
+      {/* Track */}
+      <Inputs
+        name="track"
+        placeholder="Select Track"
+        bgcolor="#e6eaee"
+        value={track}
+        onChange={handleTrackChange}
+        type="select"
+        options={[
+          "FullStack Development",
+          "Backend Development",
+          "Cloud Computing",
+          "Data Analysis",
+          "Cyber Security",
+        ]}
+      />
+
+      {/* Date */}
+      <Inputs
+        name="date"
+        placeholder="Sort By Date"
+        bgcolor="#e6eaee"
+        value={dateRange}
+        onChange={handleDateChange}
+        type="select"
+        options={[
+          "Last 7 Days",
+          "Last 14 Days",
+          "Last 21 Days",
+          "Last 30 Days",
+        ]}
+      />
     </div>
   );
 }
